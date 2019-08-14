@@ -1,84 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Stage.gd" type="Script" id=2]
-[ext_resource path="res://assets/soil_side.png" type="Texture" id=3]
-[ext_resource path="res://assets/soil_top.png" type="Texture" id=4]
-[ext_resource path="res://assets/soil_inner.png" type="Texture" id=5]
-[ext_resource path="res://assets/soil_corner.png" type="Texture" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Node" type="Node"]
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 64 )
+position = Vector2( 128, 128 )
 z_index = 1
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource( 2 )
-
-[node name="soil_side" type="RigidBody2D" parent="Node2D"]
-editor/display_folded = true
-position = Vector2( 16, 48 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="soil" type="Sprite" parent="Node2D/soil_side"]
-rotation = -3.14159
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/soil_side"]
-scale = Vector2( 1.61, 1.6 )
-shape = SubResource( 1 )
-
-[node name="soil_top" type="RigidBody2D" parent="Node2D"]
-editor/display_folded = true
-position = Vector2( 48, 16 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="soil_top" type="Sprite" parent="Node2D/soil_top"]
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/soil_top"]
-scale = Vector2( 1.61, 1.6 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="soil_inner" type="RigidBody2D" parent="Node2D"]
-position = Vector2( 48, 48 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="soil_inner" type="Sprite" parent="Node2D/soil_inner"]
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/soil_inner"]
-scale = Vector2( 1.61, 1.6 )
-shape = SubResource( 1 )
-
-[node name="soil_corner" type="RigidBody2D" parent="Node2D"]
-position = Vector2( 16, 16 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="soil_corner" type="Sprite" parent="Node2D/soil_corner"]
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/soil_corner"]
-scale = Vector2( 1.61, 1.6 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
