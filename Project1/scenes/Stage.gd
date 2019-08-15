@@ -8,6 +8,7 @@ var can_spawn = true
 var max_enemy = 5
 var move_speed = 100
 var signVar = 1
+export var score = 0
 
 func _ready():
 	timer = Timer.new()
