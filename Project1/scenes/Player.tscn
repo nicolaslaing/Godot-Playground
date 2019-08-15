@@ -32,6 +32,6 @@ polygon = PoolVector2Array( 5.13219, -13.4496, 7.06497, -4.47823, 6.37674, -1.02
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "run"
-frame = 7
+frame = 6
 playing = true
 script = ExtResource( 10 )

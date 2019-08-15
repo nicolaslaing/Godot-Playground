@@ -3,28 +3,65 @@ extends Node2D
 var enemy = preload("res://scenes/Enemy.tscn")
 
 var timer = null
+var roundTimer = null
+
 var default_delay = 2
+var default_round_delay = 11
+
 var can_spawn = true
+var play = true
+
 var max_enemy = 5
 var num_enemy = 0
 var move_speed = 100
 var signVar = 1
+
 export var score = 0
+export var killTier = 0
 
 func _ready():
-	timer = Timer.new()
-	timer.connect("timeout", self, "on_timeout_complete")
-	add_child(timer)
+	killTier = 3
 	
-func on_timeout_complete():
+	timer = Timer.new()
+	timer.connect("timeout", self, "on_timeout_complete_allowspawn")
+	
+	roundTimer = Timer.new()
+	roundTimer.connect("timeout", self, "on_timeout_complete_startround")
+	
+	add_child(timer)
+	add_child(roundTimer)
+	
+func on_timeout_complete_allowspawn():
 	can_spawn = true
+
+func on_timeout_complete_startround():
+	print("Starting round")
+	play = true
+	killTier += 5
+	roundTimer.stop()
 	
 func _process(delta):
-	if can_spawn:
+	if play && can_spawn:
 		spawn_enemy()
 		can_spawn = false
 		timer.wait_time = default_delay
 		timer.start()
+		
+	if play && score == killTier:
+		print("Ending round")
+		play = false
+		roundTimer.wait_time = default_round_delay
+		roundTimer.start()
+		
+	if roundTimer.time_left > 0:
+		$Countdown.text = String(int(roundTimer.time_left))
+	else:
+		$Countdown.text = ""
+		
+	if num_enemy > 0:
+		$EnemyCount.text = "Enemies: " + String(num_enemy)
+	else:
+		$EnemyCount.text = "Enemies: 0"
 
 func switch_sign():
 	var rangeNum = 100

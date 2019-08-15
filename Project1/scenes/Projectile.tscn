@@ -37,5 +37,4 @@ shape = SubResource( 1 )
 scale = Vector2( 0.213024, 0.204607 )
 frames = SubResource( 2 )
 animation = "fireball"
-frame = 4
 playing = true

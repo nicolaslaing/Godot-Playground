@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Stage.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/PopupMenu.gd" type="Script" id=3]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,3 +16,26 @@ margin_right = 96.0
 margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 text = "Score: 0"
+
+[node name="EnemyCount" type="Label" parent="."]
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 46.0
+rect_scale = Vector2( 2, 2 )
+text = "Enemies: 0"
+
+[node name="Countdown" type="Label" parent="."]
+margin_left = 472.834
+margin_top = 79.1664
+margin_right = 488.834
+margin_bottom = 95.1664
+rect_scale = Vector2( 4, 4 )
+align = 1
+valign = 1
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_left = 260.497
+margin_top = 4.20616
+margin_right = 772.497
+margin_bottom = 132.206
+script = ExtResource( 3 )
