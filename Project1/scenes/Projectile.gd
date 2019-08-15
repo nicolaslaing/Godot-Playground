@@ -9,14 +9,14 @@ var motion = Vector2(motionX, motionY)
 
 func _physics_process(delta):
 	if motionX != 0:
-		dist += motionX
+		dist += abs(motionX)
 	if motionY != 0:
-		dist += motionY
+		dist += abs(motionY)
 	motion = Vector2(motionX, motionY)
 	
 	var collisionInfo = move_and_collide(motion*delta)
 
-	if abs(dist) > max_dist:
+	if dist > max_dist:
 		self.call_deferred("free")
 	elif collisionInfo != null:
 		get_node("/root/Stage").num_enemy -= 1
