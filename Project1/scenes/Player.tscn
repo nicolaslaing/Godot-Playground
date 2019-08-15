@@ -1,15 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
-[ext_resource path="res://animations/tile000.png" type="Texture" id=2]
-[ext_resource path="res://animations/tile001.png" type="Texture" id=3]
-[ext_resource path="res://animations/tile002.png" type="Texture" id=4]
-[ext_resource path="res://animations/tile003.png" type="Texture" id=5]
-[ext_resource path="res://animations/tile004.png" type="Texture" id=6]
-[ext_resource path="res://animations/tile005.png" type="Texture" id=7]
-[ext_resource path="res://animations/tile006.png" type="Texture" id=8]
-[ext_resource path="res://animations/tile007.png" type="Texture" id=9]
+[ext_resource path="res://animations/Player/tile000.png" type="Texture" id=2]
+[ext_resource path="res://animations/Player/tile001.png" type="Texture" id=3]
+[ext_resource path="res://animations/Player/tile002.png" type="Texture" id=4]
+[ext_resource path="res://animations/Player/tile003.png" type="Texture" id=5]
+[ext_resource path="res://animations/Player/tile004.png" type="Texture" id=6]
+[ext_resource path="res://animations/Player/tile005.png" type="Texture" id=7]
+[ext_resource path="res://animations/Player/tile006.png" type="Texture" id=8]
+[ext_resource path="res://animations/Player/tile007.png" type="Texture" id=9]
 [ext_resource path="res://scenes/AnimatedSprite.gd" type="Script" id=10]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
