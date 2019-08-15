@@ -49,15 +49,23 @@ func _process(delta):
 		self.position.y += speed
 	else:
 		self.get_child(1).frame = 0
-
-	if Input.is_key_pressed(KEY_RIGHT):
-		shoot(KEY_RIGHT)
+	
+	if Input.is_key_pressed(KEY_RIGHT) && Input.is_key_pressed(KEY_UP):
+		shoot(KEY_RIGHT, KEY_UP)
+	elif Input.is_key_pressed(KEY_RIGHT) && Input.is_key_pressed(KEY_DOWN):
+		shoot(KEY_RIGHT, KEY_DOWN)
+	elif Input.is_key_pressed(KEY_LEFT) && Input.is_key_pressed(KEY_UP):
+		shoot(KEY_LEFT, KEY_UP)
+	elif Input.is_key_pressed(KEY_LEFT) && Input.is_key_pressed(KEY_DOWN):
+		shoot(KEY_LEFT, KEY_DOWN)
+	elif Input.is_key_pressed(KEY_RIGHT):
+		shoot(KEY_RIGHT, null)
 	elif Input.is_key_pressed(KEY_LEFT):
-		shoot(KEY_LEFT)
+		shoot(KEY_LEFT, null)
 	elif Input.is_key_pressed(KEY_UP):
-		shoot(KEY_UP)
+		shoot(KEY_UP, null)
 	elif Input.is_key_pressed(KEY_DOWN):
-		shoot(KEY_DOWN)
+		shoot(KEY_DOWN, null)
 
 	# Jump
 	if (Input.is_key_pressed(KEY_SPACE) && self.position.y >= -30):
@@ -69,15 +77,31 @@ func _process(delta):
 func on_timeout_complete():
 	can_shoot = true
 	
-func shoot(direction):
+func shoot(direction, direction2):
 	if can_shoot:
 		var p = projectile.instance()
 		p.set_name("projectile")
 		p.position = Vector2(self.position.x, self.position.y)
 		p.add_collision_exception_with(p)
 		get_parent().add_child(p)
-
-		if direction == KEY_RIGHT:
+		
+		if direction == KEY_RIGHT && direction2 == KEY_UP:
+			p.motionX += p.projSpeed
+			p.motionY -= p.projSpeed
+			p.position.x += offset
+		elif direction == KEY_RIGHT && direction2 == KEY_DOWN:
+			p.motionX += p.projSpeed
+			p.motionY += p.projSpeed
+			p.position.x -= offset
+		elif direction == KEY_LEFT && direction2 == KEY_UP:
+			p.motionX -= p.projSpeed
+			p.motionY -= p.projSpeed
+			p.position.y -= offset
+		elif direction == KEY_LEFT && direction2 == KEY_DOWN:
+			p.motionX -= p.projSpeed
+			p.motionY += p.projSpeed
+			p.position.y += offset
+		elif direction == KEY_RIGHT:
 			p.motionX += p.projSpeed
 			p.position.x += offset
 		elif direction == KEY_LEFT:
