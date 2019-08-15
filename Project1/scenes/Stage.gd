@@ -39,7 +39,7 @@ func spawn_enemy():
 #	inst_enemy.set_collision_layer_bit(1, true)
 	if num_enemy < max_enemy:
 		inst_enemy.set_name("enemy")
-		inst_enemy.add_collision_exception_with(inst_enemy)
+#		inst_enemy.add_collision_exception_with(inst_enemy)
 		
 		var xPos = 0
 		var yPos = 0
@@ -48,17 +48,18 @@ func spawn_enemy():
 		var xOffset = randi() % int(bottomRight)/2
 		var yOffset = randi() % int(bottomLeft)/2
 		var corner = randi() % 4 + 1
-		while(xPos >= 0 && xPos <= bottomRight && yPos >= 0 && yPos <= bottomLeft):
+		
+		while((xPos >= 0 && xPos <= bottomRight) && (yPos >= 0 && yPos <= bottomLeft)):
 			xPos = randi() % 200 + 100
 			yPos = randi() % 200 + 100
 			if corner == 1:
-				xPos = xPos + xOffset * -1
-				yPos = yPos + yOffset * -1
+				xPos = (xPos + xOffset) * -1
+				yPos = (yPos + yOffset) * -1
 			elif corner == 2:
 				xPos = xPos + bottomRight
-				yPos = yPos + yOffset * -1
+				yPos = (yPos + yOffset) * -1
 			elif corner == 3:
-				xPos = xPos + xOffset * -1
+				xPos = (xPos + xOffset) * -1
 				yPos = yPos + bottomLeft
 			elif corner == 4:
 				xPos = xPos + bottomRight
