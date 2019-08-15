@@ -20,35 +20,40 @@ func _process(delta):
 #	translate(Vector2(100*delta,0))
 #	if(position.x > 1000):
 #		position = Vector2(0, get_viewport().size.y/2)
-	
+	$AnimatedSprite.play()
 	if Input.is_key_pressed(KEY_W) && Input.is_key_pressed(KEY_D):
 		self.position.y -= speed
 		self.position.x += speed
-		self.get_child(1).flip_h = false
+		$AnimatedSprite.flip_h = false
 	elif Input.is_key_pressed(KEY_W) && Input.is_key_pressed(KEY_A):
 		self.position.y -= speed
 		self.position.x -= speed
-		self.get_child(1).flip_h = true
+		$AnimatedSprite.flip_h = true
 	elif Input.is_key_pressed(KEY_S) && Input.is_key_pressed(KEY_D):
 		self.position.y += speed
 		self.position.x += speed
-		self.get_child(1).flip_h = false
+		$AnimatedSprite.flip_h = false
 	elif Input.is_key_pressed(KEY_S) && Input.is_key_pressed(KEY_A):
 		self.position.y += speed
 		self.position.x -= speed
-		self.get_child(1).flip_h = true
+		$AnimatedSprite.flip_h = true
 	elif Input.is_key_pressed(KEY_D):
 		self.position.x += speed
-		self.get_child(1).flip_h = false
+		$AnimatedSprite.flip_h = false
 	elif Input.is_key_pressed(KEY_A):
 		self.position.x -= speed
-		self.get_child(1).flip_h = true
+		$AnimatedSprite.flip_h = true
 	elif Input.is_key_pressed(KEY_W):
 		self.position.y -= speed
 	elif Input.is_key_pressed(KEY_S):
 		self.position.y += speed
 	else:
-		self.get_child(1).frame = 0
+		$AnimatedSprite.stop()
+		$AnimatedSprite.frame = 0
+
+	# Prevent player from leaving screen
+	position.x = clamp(position.x, 0, get_viewport().size.x)
+	position.y = clamp(position.y, 0, get_viewport().size.y) 
 	
 	if Input.is_key_pressed(KEY_RIGHT) && Input.is_key_pressed(KEY_UP):
 		shoot(KEY_RIGHT, KEY_UP)
