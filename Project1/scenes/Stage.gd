@@ -45,10 +45,10 @@ func spawn_enemy():
 		var yPos = 0
 		var bottomRight = get_viewport().size.x
 		var bottomLeft = get_viewport().size.y
-		var corner = randi() % 5 + 1
+		var xOffset = randi() % int(bottomRight)/2
+		var yOffset = randi() % int(bottomLeft)/2
+		var corner = randi() % 4 + 1
 		while(xPos >= 0 && xPos <= bottomRight && yPos >= 0 && yPos <= bottomLeft):
-			var xOffset = randi() % int(bottomRight)/2
-			var yOffset = randi() % int(bottomLeft)/2
 			xPos = randi() % 200 + 100
 			yPos = randi() % 200 + 100
 			if corner == 1:
