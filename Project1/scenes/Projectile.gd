@@ -9,8 +9,25 @@ var motion = Vector2(motionX, motionY)
 
 func _physics_process(delta):
 	if motionX != 0:
+		if motionX < 0:
+			if motionY < 0 && self.rotation_degrees == 0:
+				rotate(deg2rad(45))
+			elif motionY > 0 && self.rotation_degrees == 0:
+				rotate(deg2rad(-45))
+			self.get_child(1).flip_h = true
+		elif motionX > 0:
+			if motionY < 0 && self.rotation_degrees == 0:
+				rotate(deg2rad(-45))
+			elif motionY > 0 && self.rotation_degrees == 0:
+				rotate(deg2rad(45))
+			self.get_child(1).flip_h = false
+			
 		dist += abs(motionX)
 	if motionY != 0:
+		if motionY < 0 && self.rotation_degrees == 0:
+			rotate(deg2rad(-90))
+		elif motionY > 0 && self.rotation_degrees == 0:
+			rotate(deg2rad(90))
 		dist += abs(motionY)
 	motion = Vector2(motionX, motionY)
 	
