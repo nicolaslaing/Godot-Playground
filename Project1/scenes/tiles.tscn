@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Stage.gd" type="Script" id=1]
+[ext_resource path="res://assets/soil_side.png" type="Texture" id=2]
+[ext_resource path="res://assets/soil_top.png" type="Texture" id=3]
+[ext_resource path="res://assets/soil_inner.png" type="Texture" id=4]
+[ext_resource path="res://assets/soil_corner.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Node2D" type="Node2D"]
+editor/display_folded = true
+script = ExtResource( 1 )
+
+[node name="soil_side" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 16, 48 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="soil" type="Sprite" parent="soil_side"]
+rotation = -3.14159
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="soil_side"]
+scale = Vector2( 1.61, 1.6 )
+shape = SubResource( 1 )
+
+[node name="soil_top" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 48, 16 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="soil_top" type="Sprite" parent="soil_top"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="soil_top"]
+scale = Vector2( 1.61, 1.6 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="soil_inner" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 48, 48 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="soil_inner" type="Sprite" parent="soil_inner"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="soil_inner"]
+scale = Vector2( 1.61, 1.6 )
+shape = SubResource( 1 )
+
+[node name="soil_corner" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 16, 16 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="soil_corner" type="Sprite" parent="soil_corner"]
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="soil_corner"]
+scale = Vector2( 1.61, 1.6 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
