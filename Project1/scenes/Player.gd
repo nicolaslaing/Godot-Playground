@@ -12,7 +12,7 @@ func _ready():
 	timer.connect("timeout", self, "on_timeout_complete")
 	add_child(timer)
 #
-	position = Vector2(128, 128)
+	position = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 #	scale = Vector2(5,5)
 #	rotate(deg2rad(90))
 

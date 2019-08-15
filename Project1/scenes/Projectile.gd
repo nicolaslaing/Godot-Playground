@@ -19,8 +19,10 @@ func _physics_process(delta):
 	if abs(dist) > max_dist:
 		self.call_deferred("free")
 	elif collisionInfo != null:
+		get_node("/root/Stage").num_enemy -= 1
 		get_node("/root/Stage").score += 1
 		get_node("/root/Stage/Score").text = "Score: " + String(get_node("/root/Stage").score)
+		
 		collisionInfo.collider_shape.get_parent().call_deferred("free")
 		self.call_deferred("free")
 

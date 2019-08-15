@@ -27,4 +27,4 @@ func _process(delta):
 		
 	if abs(dist) > max_dist:
 		self.call_deferred("free")
-		num_enemy -= 1
+		get_parent().num_enemy -= 1

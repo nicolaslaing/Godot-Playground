@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://animations/tile000.png" type="Texture" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://animations/tile005.png" type="Texture" id=7]
 [ext_resource path="res://animations/tile006.png" type="Texture" id=8]
 [ext_resource path="res://animations/tile007.png" type="Texture" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+render_priority = 1
+blend_mode = 1
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,5 +31,6 @@ position = Vector2( -0.0981293, -0.520401 )
 polygon = PoolVector2Array( 5.13219, -13.4496, 7.06497, -4.47823, 6.37674, -1.02274, 11.3698, -0.74535, 10.6301, 5.26476, 6.28428, 7.76126, 7.11645, 9.88792, 8.59586, 15.3432, -6.38318, 15.6206, -6.75303, 8.31604, -10.4516, 3.87781, -5.36608, -1.76244, -6.39305, -13.0544 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
 frames = SubResource( 1 )
 animation = "run"
