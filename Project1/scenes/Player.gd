@@ -3,9 +3,15 @@ extends KinematicBody2D
 var timer = null
 var projectile = preload("res://scenes/Projectile.tscn")
 var speed = 3
-var offset = 0
+
+var default_offsetX = 50
+var default_offsetY = 75
+var offsetX = default_offsetX
+var offsetY = default_offsetY
+
 var default_delay = 0.5
 var can_shoot = true
+var lastShootKeyPressed = Vector2(0,0)
 
 func _ready():
 	timer = Timer.new()
@@ -64,13 +70,13 @@ func _process(delta):
 	elif Input.is_key_pressed(KEY_LEFT) && Input.is_key_pressed(KEY_DOWN):
 		shoot(KEY_LEFT, KEY_DOWN)
 	elif Input.is_key_pressed(KEY_RIGHT):
-		shoot(KEY_RIGHT, null)
+		shoot(KEY_RIGHT, 0)
 	elif Input.is_key_pressed(KEY_LEFT):
-		shoot(KEY_LEFT, null)
+		shoot(KEY_LEFT, 0)
 	elif Input.is_key_pressed(KEY_UP):
-		shoot(KEY_UP, null)
+		shoot(0, KEY_UP)
 	elif Input.is_key_pressed(KEY_DOWN):
-		shoot(KEY_DOWN, null)
+		shoot(0, KEY_DOWN)
 
 	# Jump
 	if (Input.is_key_pressed(KEY_SPACE) && self.position.y >= -30):
@@ -82,42 +88,57 @@ func _process(delta):
 func on_timeout_complete():
 	can_shoot = true
 	
-func shoot(direction, direction2):
+func shoot(directionX, directionY):
 	if can_shoot:
 		var p = projectile.instance()
 		p.set_name("projectile")
-		p.position = Vector2(self.position.x, self.position.y)
+		
+		offsetX = default_offsetX
+		offsetY = default_offsetY
+		if directionX == KEY_LEFT:
+			offsetX *= -1
+			offsetY = 0
+		if directionY == KEY_UP:
+			offsetY *= -1
+			offsetX = 0
+		if directionX == KEY_RIGHT:
+			offsetY = 0
+		if directionY == KEY_DOWN:
+			offsetX = 0
+			
+		p.position = Vector2(self.position.x + offsetX, self.position.y + offsetY)
 		p.add_collision_exception_with(p)
 		get_parent().add_child(p)
 		
-		if direction == KEY_RIGHT && direction2 == KEY_UP:
+		# Shoot in 45 degree axes
+		if directionX == KEY_RIGHT && directionY == KEY_UP:
 			p.motionX += p.projSpeed
 			p.motionY -= p.projSpeed
-			p.position.x += offset
-		elif direction == KEY_RIGHT && direction2 == KEY_DOWN:
+			lastShootKeyPressed = Vector2(KEY_RIGHT, KEY_UP)
+		elif directionX == KEY_RIGHT && directionY == KEY_DOWN:
 			p.motionX += p.projSpeed
 			p.motionY += p.projSpeed
-			p.position.x -= offset
-		elif direction == KEY_LEFT && direction2 == KEY_UP:
+			lastShootKeyPressed = Vector2(KEY_RIGHT, KEY_DOWN)
+		elif directionX == KEY_LEFT && directionY == KEY_UP:
 			p.motionX -= p.projSpeed
 			p.motionY -= p.projSpeed
-			p.position.y -= offset
-		elif direction == KEY_LEFT && direction2 == KEY_DOWN:
+			lastShootKeyPressed = Vector2(KEY_LEFT, KEY_UP)
+		elif directionX == KEY_LEFT && directionY == KEY_DOWN:
 			p.motionX -= p.projSpeed
 			p.motionY += p.projSpeed
-			p.position.y += offset
-		elif direction == KEY_RIGHT:
+			lastShootKeyPressed = Vector2(KEY_LEFT, KEY_DOWN)
+		elif directionX == KEY_RIGHT:
 			p.motionX += p.projSpeed
-			p.position.x += offset
-		elif direction == KEY_LEFT:
+			lastShootKeyPressed = Vector2(KEY_RIGHT, 0)
+		elif directionX == KEY_LEFT:
 			p.motionX -= p.projSpeed
-			p.position.x -= offset
-		elif direction == KEY_UP:
+			lastShootKeyPressed = Vector2(KEY_LEFT, 0)
+		elif directionY == KEY_UP:
 			p.motionY -= p.projSpeed
-			p.position.y -= offset
-		elif direction == KEY_DOWN:
+			lastShootKeyPressed = Vector2(0, KEY_UP)
+		elif directionY == KEY_DOWN:
 			p.motionY += p.projSpeed
-			p.position.y += offset
+			lastShootKeyPressed = Vector2(0, KEY_DOWN)
 
 		can_shoot = false
 		timer.wait_time = default_delay
